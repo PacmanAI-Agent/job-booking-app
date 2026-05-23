@@ -6,6 +6,15 @@ const TABLE_ID      = 'tblHkIbvRNOcx6lVQ';   // Fleet Management table
 // ====================================================
 
 const form = document.getElementById('bookingForm');
+// Pull company name from URL query string (e.g. ?company=Acme) and store it
+const urlParams = new URLSearchParams(window.location.search);
+const companyName = urlParams.get('company') || '';
+// Set hidden field value
+const companyInput = document.getElementById('company');
+if (companyInput) companyInput.value = companyName;
+// Show on page
+const companyDisplay = document.getElementById('companyDisplay');
+if (companyDisplay) companyDisplay.textContent = companyName ? `Company: ${companyName}` : '';
 const statusEl = document.getElementById('status');
 
 // Auto‑fill today’s date
@@ -18,8 +27,8 @@ form.addEventListener('submit', async e => {
   const formData = new FormData(form);
   const fields = {};
 
-  // Simple scalar fields
-  ['Name','Destination','Description','Phone','Date'].forEach(k => {
+  // Simple scalar fields (including Company)
+  ['Name','Destination','Description','Phone','Date','Company'].forEach(k => {
     const v = formData.get(k);
     if (v) fields[k] = v;
   });

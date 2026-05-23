@@ -11,10 +11,13 @@
 <header>
 <img src="logo.png" alt="App logo" class="logo">
 <h1>Job Booking</h1>
+  <p id="companyDisplay" style="font-weight: bold; text-align:center; margin-top:0.5rem;"></p>
 </header>
 
 <main>
 <form id="bookingForm">
+  <!-- Company name is supplied via URL ?company=YourCompany -->
+  <input type="hidden" id="company" name="Company" value="">
 <!-- Name (scroll‑wheel selector) -->
 <label for="namePicker">Name</label>
 <select id="namePicker" name="Name" required>
