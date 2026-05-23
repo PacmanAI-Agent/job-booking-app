@@ -18,9 +18,9 @@
 <form id="bookingForm">
   <!-- Company name is supplied via URL ?company=YourCompany -->
   <input type="hidden" id="company" name="Company" value="">
-<!-- Name (scroll‑wheel selector) -->
-<label for="namePicker">Name</label>
-<select id="namePicker" name="Name" required>
+<!-- Contact (scroll‑wheel selector) -->
+<label for="namePicker">Contact</label>
+<select id="namePicker" name="Contact" required>
 <option value="" disabled selected>Choose…</option>
 <option value="Alice">Alice</option>
 <option value="Bob">Bob</option>
@@ -28,9 +28,13 @@
 <!-- Add more options as needed -->
 </select>
 
-<!-- Destination -->
-<label for="destination">Destination / Address</label>
+<!-- Company Destination -->
+<label for="destination">Company Destination</label>
 <input type="text" id="destination" name="Destination" placeholder="e.g. 123 Main St" required>
+
+<!-- Optional Address -->
+<label for="address">Address (optional)</label>
+<input type="text" id="address" name="Address" placeholder="e.g. Suite 5, 456 Oak Ave">
 
 <!-- Description -->
 <label for="description">Description</label>
@@ -50,9 +54,9 @@
 <label for="attachments">Attachments (photos / docs)</label>
 <input type="file" id="attachments" name="Attachments" accept="image/*,application/pdf" multiple>
 
-<!-- Today’s date (auto‑filled) -->
+<!-- Booking Date (auto‑filled) -->
 <label for="date">Date</label>
-<input type="date" id="date" name="Date" required>
+<input type="date" id="date" name="Date" required readonly>
 
 <button type="submit">Book Job</button>
 </form>
@@ -61,6 +65,6 @@
 
 </main>
 
-<script src="app.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
