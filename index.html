@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Job Booking</title>
+<link rel="manifest" href="manifest.json">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+<img src="logo.png" alt="App logo" class="logo">
+<h1>Job Booking</h1>
+</header>
+
+<main>
+<form id="bookingForm">
+<!-- Name (scroll‑wheel selector) -->
+<label for="namePicker">Name</label>
+<select id="namePicker" name="Name" required>
+<option value="" disabled selected>Choose…</option>
+<option value="Alice">Alice</option>
+<option value="Bob">Bob</option>
+<option value="Charlie">Charlie</option>
+<!-- Add more options as needed -->
+</select>
+
+<!-- Destination -->
+<label for="destination">Destination / Address</label>
+<input type="text" id="destination" name="Destination" placeholder="e.g. 123 Main St" required>
+
+<!-- Description -->
+<label for="description">Description</label>
+<textarea id="description" name="Description" rows="3" placeholder="Job details" required></textarea>
+
+<!-- Pick‑up / Drop‑off -->
+<div class="checkboxes">
+<label><input type="checkbox" name="PickUp" value="Yes"> Pick‑up</label>
+<label><input type="checkbox" name="DropOff" value="Yes"> Drop‑off</label>
+</div>
+
+<!-- Phone (optional) -->
+<label for="phone">Phone (optional)</label>
+<input type="tel" id="phone" name="Phone" placeholder="e.g. 022 370 3540">
+
+<!-- Attachments -->
+<label for="attachments">Attachments (photos / docs)</label>
+<input type="file" id="attachments" name="Attachments" accept="image/*,application/pdf" multiple>
+
+<!-- Today’s date (auto‑filled) -->
+<label for="date">Date</label>
+<input type="date" id="date" name="Date" required>
+
+<button type="submit">Book Job</button>
+</form>
+
+<section id="status"></section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
