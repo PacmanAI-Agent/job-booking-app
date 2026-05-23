@@ -12,22 +12,18 @@ const companyName = companyInput ? companyInput.value : '';
 const statusEl = document.getElementById('status');
 
 // Auto‑fill today’s date
-document.getElementById('date').valueAsDate = new Date();
-// Add date spinner controls
-const dateInput = document.getElementById('date');
-const upBtn = document.getElementById('date-up');
-const downBtn = document.getElementById('date-down');
-if (upBtn && downBtn) {
-  upBtn.addEventListener('click', () => {
-    const current = new Date(dateInput.value);
-    current.setDate(current.getDate() + 1);
-    dateInput.valueAsDate = current;
+// Initialize Mobiscroll date picker (if available)
+if (typeof mobiscroll !== 'undefined') {
+  mobiscroll.Datepicker('#date-picker', {
+    theme: 'ios',
+    display: 'bottom',
+    dateFormat: 'yy-mm-dd',
+    defaultValue: new Date()
   });
-  downBtn.addEventListener('click', () => {
-    const current = new Date(dateInput.value);
-    current.setDate(current.getDate() - 1);
-    dateInput.valueAsDate = current;
-  });
+} else {
+  // Fallback: set native date input if present
+  const dateInput = document.getElementById('date-picker');
+  if (dateInput) dateInput.valueAsDate = new Date();
 }
 
 form.addEventListener('submit', async e => {
