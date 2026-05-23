@@ -11,25 +11,36 @@ const companyInput = document.getElementById('company');
 const companyName = companyInput ? companyInput.value : '';
 const statusEl = document.getElementById('status');
 
-// Auto‑fill today’s date
-// Initialize Mobiscroll date picker (if available)
+// Auto‑fill today’s date and initialise the Mobiscroll date picker on page load
+// Ensure default Mobiscroll settings (theme)
 if (typeof mobiscroll !== 'undefined') {
-  mobiscroll.Datepicker('#date-picker', {
-    theme: 'ios',
-    display: 'bottom', // show as a spin wheel picker from bottom
-    dateFormat: 'dd MM yy',
-    defaultValue: new Date(),
-    // configure wheels for day, month, year scrolling
-    dateWheels: [
-      ['dd'],
-      ['mm'],
-      ['yy']
-    ]
-  });
+  mobiscroll.settings = { theme: 'ios' };
+}
+function initDatePicker() {
+  if (typeof mobiscroll !== 'undefined') {
+    mobiscroll.Datepicker('#date-picker', {
+      theme: 'ios',
+      display: 'bottom', // spin‑wheel style from bottom
+      dateFormat: 'dd MM yy',
+      defaultValue: new Date(),
+      dateWheels: [
+        ['dd'],
+        ['mm'],
+        ['yy']
+      ]
+    });
+  } else {
+    // Fallback to native date input (if we ever revert)
+    const dateInput = document.getElementById('date-picker');
+    if (dateInput) dateInput.valueAsDate = new Date();
+  }
+}
+
+// Run after DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDatePicker);
 } else {
-  // Fallback: set native date input if present
-  const dateInput = document.getElementById('date-picker');
-  if (dateInput) dateInput.valueAsDate = new Date();
+  initDatePicker();
 }
 
 form.addEventListener('submit', async e => {
