@@ -20,7 +20,7 @@ function initDatePicker() {
   if (typeof mobiscroll !== 'undefined') {
     mobiscroll.Datepicker('#date-picker', {
       theme: 'ios',
-      display: 'bottom', // spin‑wheel style from bottom
+      display: 'inline', // inline spin‑wheel visible on page
       dateFormat: 'dd MM yy',
       defaultValue: new Date(),
       dateWheels: [

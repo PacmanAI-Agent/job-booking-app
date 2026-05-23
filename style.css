@@ -63,6 +63,12 @@ button:active { opacity: .9; }
   line-height: 1;
   padding: 0;
 }
+
+/* Inline mobiscroll wheel */
+.date-wheel {
+  margin-top: .5rem;
+}
+
   display: flex;
   gap: 1rem;
   margin-top: .5rem;
