@@ -11,22 +11,13 @@
 <header>
 <img src="logo.png" alt="App logo" class="logo">
 <h1>Job Booking</h1>
-  <p id="companyDisplay" style="font-weight: bold; text-align:center; margin-top:0.5rem;"></p>
-</header>
+  </header>
 
 <main>
 <form id="bookingForm">
-  <!-- Company name is supplied via URL ?company=YourCompany -->
-  <input type="hidden" id="company" name="Company" value="">
-<!-- Contact (scroll‑wheel selector) -->
-<label for="namePicker">Contact</label>
-<select id="namePicker" name="Contact" required>
-<option value="" disabled selected>Choose…</option>
-<option value="Alice">Alice</option>
-<option value="Bob">Bob</option>
-<option value="Charlie">Charlie</option>
-<!-- Add more options as needed -->
-</select>
+<!-- Fixed Company Name -->
+<input type="hidden" id="company" name="Company" value="Arkwright’s Freight Ltd">
+<p style="font-weight: bold; text-align:center; margin-top:0.5rem;">Company: Arkwright’s Freight Ltd</p>
 
 <!-- Company Destination -->
 <label for="destination">Company Destination</label>
