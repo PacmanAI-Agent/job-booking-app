@@ -47,7 +47,11 @@
 
 <!-- Booking Date (auto‑filled) -->
 <label for="date">Date</label>
-<input type="date" id="date" name="Date" required>
+<div class="date-spinner">
+  <input type="date" id="date" name="Date" required>
+  <button type="button" id="date-up" aria-label="Increase date">▲</button>
+  <button type="button" id="date-down" aria-label="Decrease date">▼</button>
+</div>
 
 <button type="submit">Book Job</button>
 </form>

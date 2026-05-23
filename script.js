@@ -13,6 +13,22 @@ const statusEl = document.getElementById('status');
 
 // Auto‑fill today’s date
 document.getElementById('date').valueAsDate = new Date();
+// Add date spinner controls
+const dateInput = document.getElementById('date');
+const upBtn = document.getElementById('date-up');
+const downBtn = document.getElementById('date-down');
+if (upBtn && downBtn) {
+  upBtn.addEventListener('click', () => {
+    const current = new Date(dateInput.value);
+    current.setDate(current.getDate() + 1);
+    dateInput.valueAsDate = current;
+  });
+  downBtn.addEventListener('click', () => {
+    const current = new Date(dateInput.value);
+    current.setDate(current.getDate() - 1);
+    dateInput.valueAsDate = current;
+  });
+}
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
