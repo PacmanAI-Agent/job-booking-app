@@ -46,9 +46,9 @@
 <label for="attachments">Attachments (photos / docs)</label>
 <input type="file" id="attachments" name="Attachments" accept="image/*,application/pdf" multiple>
 
-<!-- Booking Date (auto‑filled) -->
-<label for="date-picker">Date</label>
-<input type="text" id="date-picker" name="Date" required placeholder="Select date">
+<!-- Date selector (spin‑wheel) -->
+<input type="hidden" id="date-value" name="Date" required>
+<div id="date-picker" class="date-wheel"></div>
 
 <button type="submit">Book Job</button>
 </form>
@@ -67,7 +67,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     if (typeof mobiscroll !== 'undefined') {
       mobiscroll.Datepicker('#date-picker', {
-        display: 'bottom', // spin‑wheel style
+        display: 'inline', // inline spin‑wheel style
         dateFormat: 'dd MM yy',
         defaultValue: new Date(),
         dateWheels: [

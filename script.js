@@ -27,7 +27,12 @@ function initDatePicker() {
         ['dd'],
         ['mm'],
         ['yy']
-      ]
+      ],
+      // When user selects a date, copy it into the hidden input for form submission
+      onSet: function (event, inst) {
+        const hidden = document.getElementById('date-value');
+        if (hidden) hidden.value = event.valueText; // formatted as defined by dateFormat
+      }
     });
   } else {
     // Fallback to native date input (if we ever revert)
@@ -80,7 +85,13 @@ form.addEventListener('submit', async e => {
     await resp.json();
     statusEl.textContent = '✅ Job booked!';
     form.reset();
-    document.getElementById('date').valueAsDate = new Date();
+    // Reset hidden date field after successful submit
+      const hiddenDate = document.getElementById('date-value');
+      if (hiddenDate) hiddenDate.value = '';
+      // Also reset Mobiscroll picker to today
+      if (typeof mobiscroll !== 'undefined') {
+        mobiscroll.getInst('#date-picker').setValue(new Date(), true);
+      }
   } catch (err) {
     console.error(err);
     statusEl.textContent = '❌ Failed – check console';
