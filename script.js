@@ -16,9 +16,15 @@ const statusEl = document.getElementById('status');
 if (typeof mobiscroll !== 'undefined') {
   mobiscroll.Datepicker('#date-picker', {
     theme: 'ios',
-    display: 'bottom',
+    display: 'bottom', // show as a spin wheel picker from bottom
     dateFormat: 'dd MM yy',
-    defaultValue: new Date()
+    defaultValue: new Date(),
+    // configure wheels for day, month, year scrolling
+    dateWheels: [
+      ['dd'],
+      ['mm'],
+      ['yy']
+    ]
   });
 } else {
   // Fallback: set native date input if present
