@@ -17,7 +17,7 @@ if (typeof mobiscroll !== 'undefined') {
   mobiscroll.Datepicker('#date-picker', {
     theme: 'ios',
     display: 'bottom',
-    dateFormat: 'yy-mm-dd',
+    dateFormat: 'dd MM yy',
     defaultValue: new Date()
   });
 } else {
