@@ -58,6 +58,30 @@
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@mobiscroll/javascript@5.16.0/dist/js/mobiscroll.min.js"></script>
-<script src="script.js"></script>
+<script>
+  // Ensure Mobiscroll theme is set before initialization
+  if (typeof mobiscroll !== 'undefined') {
+    mobiscroll.settings = { theme: 'ios' };
+  }
+  // Initialise date picker once DOM is ready
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof mobiscroll !== 'undefined') {
+      mobiscroll.Datepicker('#date-picker', {
+        display: 'bottom', // spin‑wheel style
+        dateFormat: 'dd MM yy',
+        defaultValue: new Date(),
+        dateWheels: [
+          ['dd'],
+          ['mm'],
+          ['yy']
+        ]
+      });
+    } else {
+      // Fallback for native input if Mobiscroll fails to load
+      const dateInput = document.getElementById('date-picker');
+      if (dateInput) dateInput.valueAsDate = new Date();
+    }
+  });
+</script>
 </body>
 </html>
