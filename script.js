@@ -1,4 +1,4 @@
-// ==== CONFIG – put your Airtable details here ====
+// ==== CONFIG - put your Airtable details here ====
 const AIRTABLE_API_KEY = 'YOUR_AIRTABLE_API_KEY';
 const BASE_ID       = 'appX0OtnSWt8JOKvh';
 const TABLE_ID      = 'tblHkIbvRNOcx6lVQ';   // Fleet Management table
@@ -6,29 +6,36 @@ const TABLE_ID      = 'tblHkIbvRNOcx6lVQ';   // Fleet Management table
 // ====================================================
 
 const form = document.getElementById('bookingForm');
-// Pull company name from URL query string (e.g. ?company=Acme) and store it
-const urlParams = new URLSearchParams(window.location.search);
-const companyName = urlParams.get('company') || '';
-// Set hidden field value
+// Company name is fixed in the HTML (hidden input & static display)
 const companyInput = document.getElementById('company');
-if (companyInput) companyInput.value = companyName;
-// Show on page
-const companyDisplay = document.getElementById('companyDisplay');
-if (companyDisplay) companyDisplay.textContent = companyName ? `Company: ${companyName}` : '';
+const companyName = companyInput ? companyInput.value : '';
 const statusEl = document.getElementById('status');
 
-// Auto‑fill today’s date
-document.getElementById('date').valueAsDate = new Date();
+// Auto‑fill today\u2019s date (native date input)
+function initDatePicker() {
+  const dateInput = document.getElementById('date-picker');
+  if (dateInput) {
+    const today = new Date().toISOString().split('T')[0];
+    dateInput.value = today;
+  }
+}
+
+// Run after DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initDatePicker);
+} else {
+  initDatePicker();
+}
 
 form.addEventListener('submit', async e => {
   e.preventDefault();
-  statusEl.textContent = 'Sending…';
+  statusEl.textContent = 'Sending...';
 
   const formData = new FormData(form);
   const fields = {};
 
   // Simple scalar fields (including Company)
-  ['Contact','Destination','Address','Description','Phone','Date','Company'].forEach(k => {
+  ['Destination','Address','Description','Phone','Date','Company'].forEach(k => {
     const v = formData.get(k);
     if (v) fields[k] = v;
   });
@@ -37,7 +44,7 @@ form.addEventListener('submit', async e => {
   fields.PickUp = formData.get('PickUp') ? 'Yes' : 'No';
   fields.DropOff = formData.get('DropOff') ? 'Yes' : 'No';
 
-  // Attachments – upload each file then store URLs
+  // Attachments - upload each file then store URLs
   const attachments = formData.getAll('Attachments');
   if (attachments.length) {
     const uploaded = await Promise.all(attachments.map(uploadFile));
@@ -57,14 +64,15 @@ form.addEventListener('submit', async e => {
     await resp.json();
     statusEl.textContent = '✅ Job booked!';
     form.reset();
-    document.getElementById('date').valueAsDate = new Date();
+    // Reset date to today after successful submit
+    initDatePicker();
   } catch (err) {
     console.error(err);
-    statusEl.textContent = '❌ Failed – check console';
+    statusEl.textContent = '❌ Failed - check console';
   }
 });
 
-// Helper – upload a file to Airtable's attachment endpoint
+// Helper - upload a file to Airtable's attachment endpoint
 async function uploadFile(file) {
   const uploadResp = await fetch('https://api.airtable.com/v0/meta/files', {
     method: 'POST',

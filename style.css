@@ -43,6 +43,32 @@ button {
 button:active { opacity: .9; }
 
 .checkboxes {
+  /* existing */
+}
+
+/* Date spinner layout */
+.date-spinner {
+  display: flex;
+  align-items: center;
+  margin-top: .5rem;
+}
+.date-spinner input {
+  flex: 1;
+}
+.date-spinner button {
+  width: 2rem;
+  height: 2rem;
+  margin-left: .3rem;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0;
+}
+
+/* Inline mobiscroll wheel */
+.date-wheel {
+  margin-top: .5rem;
+}
+
   display: flex;
   gap: 1rem;
   margin-top: .5rem;
